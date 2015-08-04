@@ -1,0 +1,56 @@
+#!/usr/bin/perl
+# Written by Michael Pobega <pobegam@cs.sunyit.edu>
+
+print "Content-type: text/html\n\n";
+
+sub getPostData {
+
+    my $byteSize = $ENV{'CONTENT_LENGTH'};
+    read ( STDIN, my $post, $byteSize );
+
+    for (split(/&/, $post)) {
+        my ($field, $value) = split(/=/, $_);
+        $formValue{$field} = $value;
+    }
+    return %formValue
+}
+
+
+&getPostData if $ENV{'CONTENT_LENGTH'};
+
+
+if ($formValue{'submit1'}) {
+
+    print <<EOF;
+<form action="index.pl" method="post">
+How many columns?<br /><input type="text" name="cols" /><br />
+EOF
+
+    print "<input type='hidden' name='number' value='",$formValue{"number"},"' />";
+    print "<input type='hidden' name='increment' value='",$formValue{'increment'},"' />";
+    print "<input type='hidden' name='values' value='",$formValue{'values'},"' />";
+    print "<br /><input type='submit' name='submit2' /></form>"
+
+}  elsif ($formValue{'submit2'}) {
+
+    for ( 0 .. $formValue{'values'} ) {
+        print $formValue{'number'} + ($formValue{'increment'} * $_), "\t";
+        print "<br />" if (($_+1) % $formValue{'cols'} == 0);
+    }
+
+} else {
+
+print <<EOF;
+<h2>Homework 4! </h2>
+<form action="index.pl" method="post">
+Number: <input type="text" name="number" />
+<br />
+Increment: <input type="text" name="increment" />
+<br />
+Values to Generate: <input type="text" name="values" />
+<br /><br />
+<input type="submit" name="submit1" />
+</form>
+EOF
+
+}

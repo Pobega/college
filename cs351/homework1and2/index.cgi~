@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+print "Content-type: text/html\n\n";
+
+$j = 0;
+while ($j < 10) { ## Iterates 10 times
+	print $j+1 . ": Hello, world!<br />\n";
+	$j++;
+}
+
+print '<br />';
+
+# checks that opening succeeds, and sends file handle to an array
+open(FILE, "<", "file") || die "Could not open file: $!";
+@file=<FILE>;
+close(FILE);
+
+foreach $line ( @file ) {
+	chomp $line;
+	print $line;
+}

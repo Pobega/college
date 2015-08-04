@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+# Written by Michael Pobega <pobegam@cs.sunyit.edu>
+
+print "Content-type: text/html\n\n";
+
+sub getPostData {
+
+    my $byteSize = $ENV{'CONTENT_LENGTH'};
+    read ( STDIN, my $post, $byteSize );
+
+    for (split(/&/, $post)) {
+        my ($field, $value) = split(/=/, $_);
+        $formValue{$field} = $value;
+    }
+    return %formValue
+}
+
+
+&getPostData if $ENV{'CONTENT_LENGTH'};
+
+
+if ($formValue{'submit1'}) {
+
+    print "<form action='index.pl' method='post'>";
+    print "<input type='text' name='num$_' /><br />"
+        for (1 .. $formValue{'num_of_forms'});
+    print '<br /><input type="submit" name="submit2" /></form>';
+
+}  elsif ($formValue{'submit2'}) {
+
+    my $i = 1;
+    while ($formValue{"num$i"}) {
+
+        print "Number $i is ", $formValue{"num$i"}, "<br />";
+        $sum += $formValue{"num$i"};
+        $i++;
+    }
+
+    print "<br />Sum: $sum";
+    print "<br />Avg: ", $sum/--$i, "<br />";
+
+} else {
+
+print <<EOF;
+<h2>Homework 4! </h2>
+<form action="index.pl" method="post">
+How many numbers do you want to add? <input type="text" name="num_of_forms" />
+<br /><br />
+<input type="submit" name="submit1" />
+</form>
+EOF
+
+}

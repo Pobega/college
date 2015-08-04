@@ -1,0 +1,58 @@
+#!/usr/bin/perl
+
+# Written by Michael Pobega <pobegam@cs.sunyit.edu>
+
+
+print "Content-type: text/html\n\n";
+
+if ($ENV{'CONTENT_LENGTH'}) {
+
+    my $byteSize = $ENV{'CONTENT_LENGTH'};
+    read ( STDIN, my $post, $byteSize );
+
+    for (split(/&/, $post)) {
+        my ($field, $value) = split(/=/, $_);
+        $formValue{$field} = $value;
+    }
+
+    print "<b>Full Name:</b> $formValue{'firstname'} $formValue{'surname'}<br />";
+
+    print "<b>Gender:</b> $formValue{'sex'}<br />" if $formValue{'sex'};
+
+    print "<b>Colors:</b> ";
+    for ( qw/red yellow blue green purple/ ) {
+        print "$_ " if $formValue{$_};
+    } print "<br />";
+
+    print "<b>You wrote,</b><br />$formValue{'bio'}<br />" if $formValue{'bio'};
+
+    print "<b>Your IP: </b>$ENV{'REMOTE_ADDR'}<br />" if $formValue{'submit'} eq "Submit+with+IP";
+
+} else {
+
+print <<EOF;
+<h2>Homework 3! Forms and stuff.</h2>
+<form action="index.pl" method="post">
+First Name: <input type="text" name="firstname" />
+<br />
+Last Name: <input type="text" name="surname" />
+<br /><br />
+<input type="radio" name="sex" value="male" checked /> Male<br />
+<input type="radio" name="sex" value="female" /> Female<br />
+<br />
+Which of these colors do you like?<br />
+<input type="checkbox" name="red" />Red<br />
+<input type="checkbox" name="yellow" />Yellow<br />
+<input type="checkbox" name="blue" />Blue<br />
+<input type="checkbox" name="green" />Green<br />
+<input type="checkbox" name="purple" />Purple<br />
+<br />
+Write a bit about yourself:<br />
+<textarea name="bio" rows=6 cols=40></textarea>
+<br /><br />
+<input type="submit" name="submit" />
+<input type="submit" name="submit" value="Submit with IP" />
+</form>
+EOF
+
+}

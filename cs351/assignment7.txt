@@ -1,0 +1,308 @@
+#!/usr/bin/perl
+
+print "Content-type: text/html\n\n";
+
+ParseInput();
+ParseCookie();
+
+if (IsEmpty($data)) {
+	if (IsEmpty($cookie)) {
+		# Both empty - Initial Run
+#		print "Content-type: text/html\n\n";
+#		print "Both empty <br />\n";
+		PrintHTMLHeader();
+		PrintForm();
+		PrintHTMLFooter();
+	}
+	else {
+		# Data empty, cookie NOT - coming back to the program
+		CookieToValues();
+#		print "Content-type: text/html\n\n";
+#		print "Data empty, cookie NOT<br />\n";
+		PrintHTMLHeader();
+		PrintBody();
+		PrintHTMLFooter();
+	}
+}
+else {
+	# Data NOT empty, so we use it and set cookie to it - first form send for user (ever)	
+#	SetCookie();
+#	print "Content-type: text/html\n\n";
+#	print "Data NOT empty<br />\n";
+	PrintHTMLHeader();
+	PrintBody();
+	PrintHTMLFooter();
+}
+
+sub PrintHTMLHeader {
+	print "<html>\n";
+	print "<head>\n";
+	print "<title>Assignment 7</title>\n";
+	print "<META HTTP-EQUIV=\"Set-Cookie\" content=\"$cookie_name=cookie_name&file=$values{file}&scan_direction=$values{scan_direction}&line=$values{line}&old_file=$values{old_file}&old_scan_direction=$values{old_scan_direction}&old_line=$values{old_line}; expires=$cookie_expiration\">";
+	print "</head>\n";
+	print "<body>\n";
+}
+
+sub CookieToValues {
+	my(@fields, $name, $value);
+	$data = "$ENV{'HTTP_COOKIE'}";	
+	@fields = split(/&/, $data);
+#	print "$data<br />\n";
+	foreach $item (@fields) {
+		($name, $value) = split(/=/, $item);
+        $values{$name} = $value;
+	}
+}
+
+sub ParseInput {
+	my(@fields, $name, $value);
+	$data = <STDIN>;
+	$data = DecodeInput($data);
+	@fields = split(/&/, $data);
+#	print "$data<br />\n";
+	foreach $item (@fields) {
+		($name, $value) = split(/=/, $item);
+        $values{$name} = $value;
+	}
+}
+
+sub ParseCookie {
+	my(@fields, $name, $value);
+	$cookie = "$ENV{'HTTP_COOKIE'}";
+#	print "RAW COOKIE: $cookie<br />\n";
+	@fields = split(/&/, $cookie);
+#	print "COOKIE ARRAY: " . "@fields" . "<br />\n";	
+	foreach $item (@fields) {
+		($name, $value) = split(/=/, $item);
+		$cookies{$name} = $value;
+	}
+}
+
+#sub SetCookie {
+#	$cookie_expiration = "Sun, 10-Jan-07 13:59:59 GMT";
+#	$cookie_name = "assignment7";
+#	print "Set-Cookie: $cookie_name=cookie_name&file=$values{file}&scan_direction=$values{scan_direction}&line_number=$values{line_number}; expires=$cookie_expiration\n";
+#}
+
+sub PrintBody {
+	my($file, $scan_direction);
+	$file = $values{file};
+	$scan_direction = $values{scan_direction};
+	
+	SetCurrentLine(DetermineCurrentLine());
+
+	if (IsEmpty($file) || IsEmpty($scan_direction)) {
+		print "Missing fields\n";
+		PrintForm();
+	}
+	else {
+		if (HasUnallowedCharacters($file)) {
+			PrintForm();
+			print "Not allowed strings/characters: <b>/</b>, <b>\$HOME</b>, <b>..</b>, <b>assignment7.cgi</b>, or any non-alphabetic characters.";
+		}
+		elsif ($values{old_line} == 1 && DetermineOutOfFileBounds() eq "start") {
+			PrintForm();
+			print "You are at the start of the file.<br />\n";
+		}
+		elsif (DetermineOutOfFileBounds() eq "end") {
+			PrintForm();
+			print "You are at the end of the file.<br />\n";
+		}
+		else {
+			
+			PrintForm();
+			
+			PrintLine();
+		}
+	}
+}
+	
+sub PrintForm {
+	my($file, $scan_direction, $check);
+	$file = $values{file};
+	$scan_direction = $values{scan_direction};
+	$old_file = $values{old_file};
+	$old_scan_direction = $values{old_scan_direction};
+	
+	print "<form method=POST action=\"assignment7.cgi\">\n";
+	print " <table>\n";
+	print "         <tr><td>File name:</td><td><input type=\"text\" name=\"file\" value=\"$file\" /></td></tr>\n";
+	print "         <tr><td>Direction of scan:</td></tr>\n";
+	$check = DetermineChecked("up");
+	print "         <tr><td>Up:</td><td><input type=\"radio\" name=\"scan_direction\" value=\"up\" $check /></td></tr>\n";
+	$check = DetermineChecked("down");
+	print "         <tr><td>Down:</td><td><input type=\"radio\" name=\"scan_direction\" value=\"down\" $check /></td></tr>\n";
+	print "	<tr><td><input type=\"submit\" name=\"button\" value=\"submit\" /></td></tr>\n";
+	print " </table>\n";
+	print "<input type=\"hidden\" name=\"line\" value=\"$values{line}\" />\n";
+	print "<input type=\"hidden\" name=\"old_file\" value=\"$file\" />\n";
+	print "<input type=\"hidden\" name=\"old_scan_direction\" value=\"$scan_direction\" />\n";
+	print "<input type=\"hidden\" name=\"old_line\" value=\"$values{line}\" />\n";
+	print "</form>\n";
+
+}
+
+sub PrintLine {
+	my($line_index);
+	$line_index = DetermineLineIndex(GetCurrentLine());
+	
+	print "$file[$line_index]<br />\n";
+}
+
+sub HasUnallowedCharacters {
+	my($word);
+	$word = $_[0];
+	
+	if ( $word =~ m#(/|\$HOME|\.\.|assignment7\.cgi)#g ) {
+		return 1;
+	}
+	elsif ( $word =~ /[^a-z^A-Z]/ ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+sub IsChecked {
+	my($direction);
+	$direction = $direction = $_[0];
+	$scan_direction = GetScanDirection();
+	
+	if ($direction eq "up" && $scan_direction eq "up") {
+		return 1;
+	}
+	elsif ($direction eq "down" && $scan_direction eq "down") {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+sub IsEmpty {
+	my($var);
+	$var = $_[0];
+	
+	if ($var eq "") {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+sub DetermineOutOfFileBounds {
+
+	if ( GetCurrentLine() < 1) {
+		return "start";
+	}
+	elsif (GetCurrentLine() > GetFileLength()) {
+		return "end";
+	}
+	else {
+		return 0;
+	}
+	
+}
+
+sub DetermineCurrentLine {
+	
+	if (IsEmpty($data)){
+		return 0;
+	}	
+	elsif (GetFormChange() eq "file" || GetFormChange() eq "scan_direction") {
+		if (GetScanDirection() eq "down") {
+			return 0;
+		}
+		elsif (GetScanDirection() eq "up"){
+			return GetFileLength();
+		}
+	}	
+	elsif (GetFormChange() eq "0") {
+		if (GetScanDirection() eq "down") {
+			return GetCurrentLine() + 1;
+		}
+		elsif (GetScanDirection() eq "up") {
+			return GetCurrentLine() - 1;
+		}
+	}
+}
+
+sub DetermineLineIndex {
+	my($line_num);
+	$line_num = $_[0];
+	
+	return $line_num - 1;
+}
+
+sub DetermineChecked {
+	$direction = $_[0];
+	if (IsChecked($direction)) {
+		return checked;
+	}
+}
+
+sub SetCurrentLine {
+	$num = $_[0];
+	$values{line} = $num;
+}
+
+sub GetCurrentLine {
+	my($line);
+	
+	$line = $values{line};
+	return $line
+}
+
+sub GetFile {
+	my($file);
+	$file = $values{file};
+	
+	open(in_file, $file);
+	@file = <in_file>;
+	return @file;
+}
+
+sub GetFileLength {
+	my($file);
+	$file = GetFile();
+	return $#file + 1;
+}
+
+sub GetFormChange {
+	my($file, $old_file, $scan_direction, $old_scan_direction);
+	$file = $values{file};
+	$old_file = $values{old_file};
+	$scan_direction = $values{scan_direction};
+	$old_scan_direction = $values{old_scan_direction};
+	
+	if ($file ne $old_file) {
+		return "file";
+	}
+	elsif ($scan_direction ne $old_scan_direction) {
+		return "scan_direction";
+	}
+	else {
+		return 0;
+	}
+}
+
+sub GetScanDirection {
+	my($scan_direction);
+	$scan_direction = $values{scan_direction};
+	return $scan_direction;
+}
+
+sub DecodeInput {
+	my $input = $_[0];
+	$input =~ tr/+/ /;
+	$input =~ s/%([a-fA-F0-9]{2,2})/chr(hex($1))/eg;
+	$input =~ s/<!-(.|\n)*->//g;
+	return $input;
+}
+
+sub PrintHTMLFooter {
+	print "</body>\n";
+	print "</html>\n";
+}
