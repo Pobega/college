@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE abiword PUBLIC "-//ABISOURCE//DTD AWML 1.0 Strict//EN" "http://www.abisource.com/awml.dtd">
+<abiword template="false" styles="unlocked" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:math="http://www.w3.org/1998/Math/MathML" xid-max="254" xmlns:dc="http://purl.org/dc/elements/1.1/" fileformat="1.0" xmlns:svg="http://www.w3.org/2000/svg" xmlns:awml="http://www.abisource.com/awml.dtd" xmlns="http://www.abisource.com/awml.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" version="0.99.2" xml:space="preserve" props="dom-dir:ltr; document-footnote-restart-section:0; document-endnote-type:numeric; document-endnote-place-enddoc:1; document-endnote-initial:1; lang:en-US; document-endnote-restart-section:0; document-footnote-restart-page:0; document-footnote-type:numeric; document-footnote-initial:1; document-endnote-place-endsection:0">
+<!-- ======================================================================== -->
+<!-- This file is an AbiWord document.                                        -->
+<!-- AbiWord is a free, Open Source word processor.                           -->
+<!-- More information about AbiWord is available at http://www.abisource.com/ -->
+<!-- You should not edit this file by hand.                                   -->
+<!-- ======================================================================== -->
+
+<metadata>
+<m key="dc.format">application/x-abiword</m>
+<m key="abiword.generator">AbiWord</m>
+</metadata>
+<history version="10" edit-time="24973" last-saved="1288732268" uid="90fc8b5c-e68b-11df-862e-f72f14f33d71">
+<version id="10" started="1288719792" uid="b66488c4-e6c5-11df-862e-f72f14f33d71" auto="0" top-xid="218"/>
+</history>
+<styles>
+<s type="P" name="Normal" followedby="Current Settings" props="font-family:Dejavu Sans; margin-top:0pt; color:000000; margin-left:0pt; text-position:normal; widows:2; font-style:normal; text-indent:0in; font-variant:normal; font-weight:normal; margin-right:0pt; font-size:12pt; text-decoration:none; margin-bottom:0pt; line-height:1.0; bgcolor:transparent; text-align:left; font-stretch:normal"/>
+<s type="C" name="Reference" props="font-size:10pt"/>
+</styles>
+<pagesize pagetype="Letter" orientation="portrait" width="8.500000" height="11.000000" units="in" page-scale="1.000000"/>
+<section xid="11" props="column-line:off; columns:1; dom-dir:ltr; section-space-after:0.4100in; page-margin-footer:0.5in; page-margin-header:0.5in; text-align:left; section-max-column-height:0.0000in">
+<p style="Normal" xid="12"><c></c></p>
+<p style="Normal" xid="46"><c></c></p>
+<p style="Normal" xid="47"><c></c></p>
+<p style="Normal" xid="48"><c></c></p>
+<p style="Normal" xid="49"><c></c></p>
+<p style="Normal" xid="50"><c></c></p>
+<p style="Normal" xid="51"><c></c></p>
+<p style="Normal" xid="52"><c></c></p>
+<p style="Normal" xid="53"><c></c></p>
+<p style="Normal" xid="54" props="text-align:center"><c props="font-size:36pt">Open Source Code</c></p>
+<p style="Normal" xid="166" props="text-align:center"><c props="font-size:36pt">in</c></p>
+<p style="Normal" xid="167" props="text-align:center"><c props="font-size:36pt">Commercial Products</c></p>
+<p style="Normal" xid="168" props="text-align:center"><c props="font-size:36pt"></c></p>
+<p style="Normal" xid="169" props="text-align:center"><c props="font-size:14pt">Licensing issues</c></p>
+<p style="Normal" xid="170" props="text-align:center"><c props="font-size:14pt">Reasoning</c></p>
+<p style="Normal" xid="171" props="text-align:center"><c props="font-size:14pt">Budgetary Advantages</c></p>
+<p style="Normal" xid="189" props="text-align:center"><c props="font-size:14pt">et all</c></p>
+<p style="Normal" xid="172" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="173" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="174" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="175" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="176" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="177" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="178" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="179" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="180" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="182" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="183" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="184" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="185" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="186" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="187" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="188" props="text-align:center"><c props="font-size:14pt"></c></p>
+<p style="Normal" xid="181" props="text-align:right"><c props="font-size:14pt">Michael Pobega</c></p>
+<p style="Normal" xid="90"><c></c></p>
+<p style="Normal" xid="154" props="text-align:center"><c props="font-weight:normal; text-decoration:none; font-size:14pt">Licensing Open Source Code for Use in Commercial Products</c></p>
+<p style="Normal" xid="155" props="text-align:center"><c props="text-decoration:none; font-weight:normal; font-size:11pt">Michael Pobega</c></p>
+<p style="Normal" xid="156" props="text-align:center"><c props="text-decoration:none; font-weight:normal; font-size:11pt">CS307 Software Engineering</c></p>
+<p style="Normal" xid="10" props="text-align:center"><c props="text-decoration:none; font-weight:normal"></c></p>
+</section>
+<section footer="1" xid="201" props="text-align:left; columns:2; section-max-column-height:0.0000in; section-space-after:0.2500in; dom-dir:ltr; column-line:off">
+<p style="Normal" xid="202" props="text-align:center; line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="text-decoration:none; font-weight:normal"></c></p>
+<p style="Normal" xid="159" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Times New Roman; font-size:11pt">	</c><c props="font-weight:bold; font-family:URW Chancery L; font-size:18pt">L</c><c props="font-family:Dejavu Sans; font-size:10pt">icensing outside code for use in a commercial product can be a tricky endeavor; it is going to be either expensive to license, or timely to code from scratch. Selling source code to other companies isn’t unheard of (for example, the Quake 3 and Unreal game engines used to be sold to alleviate the time spent programming the actual physics engine; all that would have to be changed is a few variables to get it working any way a company wants), but outside of a few mainstream SDKs and libraries the practice isn’t as common as it used to be.</c></p>
+<p style="Normal" xid="221" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Making use of already-made code in a project is a smart idea, especially if the team is on a tight budget or short schedule; why reinvent the wheel when it’s probably been invented multiple times already? Libraries were created for just this purpose, the reuse of code. Finding a suitable library can sometimes be troublesome, but usually it works in favor of the development team and can increase the throughput by a large amount. It also decreases the time it takes to do testing and spiking, since the tools being used should be completed already (no team should license incomplete code.) </c></p>
+<p style="Normal" xid="14" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Proprietary code is expensive, and for a low budget maybe not suitable but using commercial code without purchasing a license can lead to lawsuits. Recently, Microsoft was sued by Alcatel-Lucent</c><c props="text-position:superscript; font-size:10pt; font-family:Dejavu Sans">[0]</c><c props="font-family:Dejavu Sans; font-size:10pt"> for using the mp3 library and format without paying royalties/licensing the library. Microsoft could have avoided this issue by adopting open source formats instead, such as Ogg Vorbis</c><c props="text-position:superscript; font-size:10pt; font-family:Dejavu Sans">[1]</c><c props="font-family:Dejavu Sans; font-size:10pt"> Microsoft could have avoided the lawsuit and distributed music without such a huge debt to pay.</c></p>
+<p style="Normal" xid="220" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Proprietary licensing is expensive though, and may even cut into a projects budget by too much to be affordable. Licensing code is usually not an option for small budget projects, as well. Assuming an alternative exists, free software could be used in place of licensed/proprietary libraries or code. </c></p>
+<p style="Normal" xid="34" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Using open source tools and software is a great way to decrease development time, leaving more time available for debugging and ensuring your product works, and saving money as it is generally free. Open source software (from now on referred to as “OSS”) has reinvented most libraries and programs, and a quick look through Sourceforge ( http://sourceforge.net/ ) shows that there are literally hundreds and thousands of OSS projects in constant development. </c></p>
+<p style="Normal" xid="36" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	OSS is very community focused -- a programmer will write a program for the better of the community, get feedback from other members and maybe even some coding help, all while releasing the code to a public repository for viewing and using. For a bit of history, before this kind of community existed a man named Richard Stallman wanted a free operating system and program suite for personal use by anyone, so he began the GNU operating system project (which ended up merging with the Linux kernel project and became the robust Linux OS seen today), and the Free Software Foundation (FSF). To protect the rights of the programmers Stallman instituted the GNU General Public License, which ends up being more restrictive then it does freeing.</c></p>
+<p style="Normal" xid="37" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Another commonly used license is the 3-clause BSD license</c><c props="text-position:superscript; font-size:10pt; font-family:Dejavu Sans">[2]</c><c props="font-family:Dejavu Sans; font-size:10pt">, which has next to no restrictions with the exception of having to include the upstream author in the credits for the program. In comparison to the BSD license, the GPL has far more restrictions is much more alike to a legal document than a freedom-promoting license.</c></p>
+<p style="Normal" xid="42" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	Implementing any BSD-licensed code into a proprietary project is trivial; as long as you give the original author credit you can use it however you want, without even having to make changes to the original code available.</c></p>
+<p style="Normal" xid="43" props="line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="font-family:Dejavu Sans; font-size:10pt">	GPL on the other hand is more restrictive in that sense; any GPL code that is statically linked into a product must have source available (for both the GPL code and the project), thus forcing projects to become GPL’d when they use GPL. GPL is commonly referred to as a ‘viral’ license, as it requires any code that uses GPL code to become GPL itself</c><c props="text-position:subscript; font-size:10pt; font-family:Dejavu Sans">[figure 4.1]</c><c props="text-position:normal; font-size:10pt; font-family:Dejavu Sans">.</c><c props="font-family:Dejavu Sans; font-size:10pt"> Obviously this is counter-intuitive for companies, since open sourcing a commercial product (unless part of the original planning) is generally not a good idea. </c></p>
+<p style="Normal" xid="206" props="text-align:center; line-height:2.0; font-weight:normal; margin-left:0.1000in; margin-right:0.1000in"><c props="font-weight:normal; font-family:Dejavu Sans; font-size:9pt; font-style:italic">Static linking</c></p>
+<p style="Normal" xid="203" props="margin-top:0.0000in; margin-left:0.1000in; text-indent:0.0000in; dom-dir:ltr; margin-bottom:0.0000in; text-align:center; line-height:2.0; font-weight:normal; margin-right:0.1000in"><c props="font-family:Dejavu Sans; text-decoration:none; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:14pt"></c><image dataid="f3a7a6d6-e6c4-11df-862e-f72f14f33d71" xid="239" props="height:2.54in; width:2.67in"/></p>
+<p style="Normal" xid="205" props="margin-top:0.0000in; margin-left:0.1000in; text-indent:0.0000in; dom-dir:ltr; margin-bottom:0.0000in; font-weight:normal; line-height:2.0; text-align:center; margin-right:0.1000in"><c props="font-family:Dejavu Sans; text-decoration:none; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; font-size:9pt">figure 4.1</c></p>
+<p style="Normal" xid="138" props="font-family:Dejavu Sans; margin-left:0.1000in; font-size:14pt; lang:en-US; line-height:2.0; text-position:normal; font-weight:bold; margin-right:0.1000in; font-style:normal; text-decoration:none"><c props="font-weight:normal; font-family:Dejavu Sans; font-size:10pt">	There are ways around the GPL’s viral nature; one way is to ask for an LGPL licensed version of the product, which places copyleft restrictions on the code itself but not any programs that make use of the code, though changes to the code would still need to be made publicly available. </c></p>
+<p style="Normal" xid="213" props="font-family:Dejavu Sans; margin-left:0.1000in; font-size:14pt; lang:en-US; line-height:2.0; text-position:normal; font-weight:bold; margin-right:0.1000in; font-style:normal; text-decoration:none"><c props="font-family:Dejavu Sans; font-size:10pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">	In the case of GPL code though, there are a few ways around the viral nature without needing the author to re-license the code. One very popular method is the “GPL Linking Exception”</c><c props="font-family:Dejavu Sans; text-decoration:none; color:000000; font-size:10pt; text-position:subscript; font-weight:normal; font-style:normal; lang:en-US">[figure 4.2]</c><c props="font-family:Dejavu Sans; text-decoration:none; color:000000; font-size:10pt; text-position:superscript; font-weight:normal; font-style:normal; lang:en-US">[3]</c><c props="font-family:Dejavu Sans; font-size:10pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">, which modifies the GPL by dynamically linking the code rather than statically linking. This gets around the restriction of having to license the product’s code as GPL, and allows for use of the GPL code. </c></p>
+<p style="Normal" xid="254" props="font-family:Dejavu Sans; font-style:normal; margin-left:0.1000in; lang:en-US; text-align:center; font-weight:bold; text-position:normal; margin-right:0.1000in; text-decoration:none; line-height:2.0; font-size:14pt"><c props="font-family:Dejavu Sans; text-decoration:none; color:000000; font-size:9pt; text-position:normal; font-weight:normal; font-style:italic; lang:en-US">Dynamic linking</c></p>
+<p style="Normal" xid="251" props="font-family:Dejavu Sans; font-style:normal; margin-left:0.1000in; lang:en-US; text-align:center; font-weight:bold; text-position:normal; margin-right:0.1000in; text-decoration:none; line-height:2.0; font-size:14pt"><c props="font-family:Dejavu Sans; font-size:10pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"></c><image dataid="3" xid="253" props="height:2.494167in; width:2.666667in"/><c props="font-family:Dejavu Sans; font-size:9pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">figure 4.2</c></p>
+<p style="Normal" xid="219" props="font-family:Dejavu Sans; margin-left:0.1000in; font-size:9pt; lang:en-US; line-height:2.0; text-position:normal; font-weight:normal; margin-right:0.1000in; font-style:normal; text-decoration:none"><c props="font-family:Dejavu Sans; font-size:10pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">	Another method that gets a lot of use is the plugin system method, in which you make the product in a way that doesn’t rely on the GPL’d library, then add in support for the library as a plugin (for example, a WYSIWYG editor in a forum software, using a GPL WYSIWYG editor.) Of course this method doesn’t work if the library is integral to the inner workings of the program, but in lieu of this method the GPL linking exception can be used. </c></p>
+<p style="Normal" xid="222" props="font-family:Dejavu Sans; margin-left:0.1000in; font-size:9pt; lang:en-US; line-height:2.0; text-position:normal; font-weight:normal; margin-right:0.1000in; font-style:normal; text-decoration:none"><c props="font-family:Dejavu Sans; font-size:10pt">	</c><c props="font-weight:normal; font-family:Dejavu Sans; font-size:10pt">BSD code requires no tricks to use, as the license itself is only one step above unlicensed/free domain. Many projects are based on BSD code, Mac OSX being the primary example. Mac OSX is based on Darwin BSD code, which is based on the original Unix BSD. Under the flashy graphics and gimmicks of OSX lies a BSD-licensed system at heart, and due to the nature of BSD Apple didn’t have to jump through hoops to use the code. </c></p>
+<p style="Normal" xid="223" props="font-family:Dejavu Sans; margin-left:0.1000in; font-size:14pt; lang:en-US; line-height:2.0; text-position:normal; font-weight:bold; margin-right:0.1000in; font-style:normal; text-decoration:none"><c props="font-weight:normal; font-family:Dejavu Sans; font-size:10pt">	In converse to that, using GPL code is generally much trickier. TiVo incorporated GPL code in it’s system, but used hardware limitations to make the code inaccessible by the users, which essentially makes it proprietary. In response Richard Stallman coined the term “Tivoization”</c><c props="text-position:superscript; font-weight:normal; font-family:Dejavu Sans; font-size:10pt">[4]</c><c props="text-position:normal; font-weight:normal; font-family:Dejavu Sans; font-size:10pt"> from this, and rewrote the GPL to prevent loopholes like this from happening in the future (which were eventually incorporated to the GPLv3).</c><c props="font-family:Dejavu Sans; font-size:10pt"><pbr/></c></p>
+</section>
+<section xid="162">
+<p style="Normal" xid="161" props="text-align:center; line-height:2.0; margin-right:0.1000in; margin-left:0.1000in"><c props="text-decoration:underline; font-family:Dejavu Sans; font-size:12pt"><pbr/></c></p>
+<p style="Normal" xid="231" props="text-align:center; line-height:2.0"><c props="text-decoration:underline; font-family:Dejavu Sans; font-size:12pt"></c><c props="text-decoration:underline; font-family:Dejavu Sans; font-size:12pt">References Used:</c></p>
+<p style="Normal" xid="165" props="text-align:center; line-height:2.0"><c props="font-family:Dejavu Sans; font-size:10pt"></c></p>
+<p style="Normal" xid="164" props="text-align:center; line-height:2.0"><c props="font-family:Dejavu Sans; font-size:10pt"></c><c props="font-family:Dejavu Sans; font-size:10pt">[0] </c><c>﻿	</c><c props="font-size:11pt">Microsoft must pay in MP3 Lawsuit</c></p>
+<p style="Normal" xid="27" props="text-align:center; line-height:2.0"><c props="font-size:11pt">	Brad Fuller</c></p>
+<p style="Normal" xid="28" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:11pt">	</c><c props="font-size:8pt">&lt;http://blogs.oreilly.com/digitalmedia/2007/02/microsoft-must-pay-in-mp3-laws.html&gt;</c></p>
+<p style="Normal" xid="29" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:8pt"></c></p>
+<p style="Normal" xid="30" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:10pt"></c><c props="font-size:10pt">[1]	</c><c props="font-size:11pt">Vorbis.com Homepage</c></p>
+<p style="Normal" xid="33" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:11pt">	</c><c props="font-size:8pt">&lt;http://www.vorbis.com/&gt;</c></p>
+<p style="Normal" xid="38" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:8pt"></c></p>
+<p style="Normal" xid="40" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:10pt">[2]	</c><c props="font-size:11pt">3-Clause BSD License</c></p>
+<p style="Normal" xid="41" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:11pt">	</c><c props="font-size:8pt">&lt;http://www.debian.org/misc/bsd.license&gt;</c></p>
+<p style="Normal" xid="214" props="text-align:center; line-height:2.0; dom-dir:ltr"><c props="font-size:8pt"></c></p>
+<p style="Normal" xid="215" props="font-family:Dejavu Sans; font-size:12pt; dom-dir:ltr; color:000000; text-decoration:none; text-align:center; line-height:2.0; text-position:normal; font-weight:normal; font-style:normal"><c props="font-family:Dejavu Sans; font-size:10pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">[3]	GPL Linking Exception</c></p>
+<p style="Normal" xid="216" props="font-family:Dejavu Sans; dom-dir:ltr; font-style:normal; margin-left:0.0000in; lang:en-US; margin-bottom:0.0000in; text-indent:0.0000in; text-position:normal; margin-top:0.0000in; font-weight:normal; margin-right:0.0000in; text-decoration:none; font-size:11pt; line-height:2.000000; text-align:center"><c props="font-family:Dejavu Sans; font-size:11pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	</c><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">&lt;</c><c props="font-size:8pt">http://en.wikipedia.org/wiki/GPL_linking_exception</c><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">&gt;</c></p>
+<p style="Normal" xid="217" props="font-family:Dejavu Sans; dom-dir:ltr; font-style:normal; margin-left:0.0000in; lang:en-US; margin-bottom:0.0000in; text-indent:0.0000in; text-position:normal; margin-top:0.0000in; font-weight:normal; margin-right:0.0000in; text-decoration:none; text-align:center; line-height:2.000000; font-size:8pt"><c props="font-family:Dejavu Sans; font-size:10pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" xid="230" props="font-family:Dejavu Sans; dom-dir:ltr; font-style:normal; margin-left:0.0000in; lang:en-US; margin-bottom:0.0000in; text-indent:0.0000in; text-position:normal; margin-top:0.0000in; font-weight:normal; margin-right:0.0000in; text-decoration:none; text-align:center; line-height:2.000000; font-size:8pt"><c props="font-family:Dejavu Sans; font-size:10pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c><c props="font-family:Dejavu Sans; font-size:10pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">[4]	Coding Horror: Tivoization and the GPL</c></p>
+<p style="Normal" xid="227" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; dom-dir:ltr; margin-bottom:0.0000in; line-height:2.000000; text-align:center; margin-right:0.0000in"><c props="font-family:Dejavu Sans; font-size:11pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">	</c><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">&lt;</c><c props="font-size:8pt">http://www.codinghorror.com/blog/2008/02/tivoization-and-the-gpl.html</c><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">&gt;</c></p>
+<p style="Normal" xid="228" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; dom-dir:ltr; margin-bottom:0.0000in; line-height:2.000000; text-align:center; margin-right:0.0000in"><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" xid="229" props="margin-top:0.0000in; margin-left:0.0000in; text-indent:0.0000in; dom-dir:ltr; margin-bottom:0.0000in; line-height:2.000000; text-align:center; margin-right:0.0000in"><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+<p style="Normal" xid="218" props="font-family:Dejavu Sans; dom-dir:ltr; font-style:normal; margin-left:0.0000in; lang:en-US; margin-bottom:0.0000in; text-indent:0.0000in; text-position:normal; margin-top:0.0000in; font-weight:normal; margin-right:0.0000in; text-decoration:none; text-align:center; line-height:2.000000; font-size:8pt"><c props="font-family:Dejavu Sans; font-size:8pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"></c></p>
+</section>
+<section id="1" listid="0" parentid="0" type="footer" xid="242">
+<p xid="243" props="text-align:right"><field type="page_number" xid="244"></field></p>
+</section>
+<data>
+<d name="3" mime-type="image/png" base64="yes">
+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
+</d>
+<d name="f3a7a6d6-e6c4-11df-862e-f72f14f33d71" mime-type="image/png" base64="yes">
+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
+vPEGPk+MdiwtLQcNGiSXy0tLS1/0TEgBAV+f9Qf+/A8fPlz3JPip/fbbbwEBAVZWVhwO5/Tp
+01piYhj27NkzBwcHPPzEiRO+vr5mZmYYhgmFwri4OGdnZ2dn57i4OHxuBTy5TCb78MMPBw4c
+2K9fv2XLluEdjCUSSWJioru7O5PJTE5Oxv5bYqjqiYmJ2bZtW6fnpapWy9UoKipyc3PTEkER
++BqQkpKiY3xSQ44SAK7G5ejo2IW0S5cufeutt6qrqy9cuJCamqpX2tTU1MzMTLhOzK5du7hc
+bm5ubm5ubn5+/u7du5UiHzx4MCMjIzMzs7S0lM/nwz5LAIB9+/bdunUrMzMzLy/vwYMH4N9a
+E7wBqgfNzMyEQxYNRXl5+Zw5c/bv369jfDiPkAFXQDNqCLWfrsAHd/bs2bonwU8tMDDw448/
+fvr0aacxq6urw8LCwsLC8PCKigo8mpeXFz6lbkFBAZvNVkru5+eHT0iRn5/v4eEBt729vQsK
+CjQdVBVra2vFAW5Kd0qLWk0ZBgQEnDt3TtNeVdauXQsAOHLkiO5JyAs5DADbQKdPn657EvyB
+uH//fmhoqIODg4+PT0ZGhtqYkP79+0dEROBdggEAimNEGAyGQCCA2wKBgMFgKB1IaTkZOp2u
+mlBVnip+fn5FRUWa4mtRqylDGo2maZda3nrrLQDA559/rlcqkkKOKhD8Kvn8+fMupA0ICEhJ
+Samvr9+9e/eWLVvUxoHX4tmzZ99//73ikr2KTSsuLi5lZWVwu6SkxNXVVSkTd3d3xUlZZDIZ
+DHdzcyspKVGKrKUVaNKkSd98842WM9KkVhNyubzTOIq0t7cDAOCU2iYPOQwA5/qsqqrqQtrQ
+0NC8vLz29nY+n8/j8bqsITw8PC4urqqqqqqqKi4uLjw8XClCdHT0qlWrCgsLOzo6cnJyQkJC
+YHhUVFRsbGxZWVldXR2sXQAAHB0d79+/r/ZASUlJp0+f3rhxY2FhoUAgaG5u1vfVRQl9v1TA
+66zqcNOk5wudLiAUCul0urm5ue7zWuKnduHChREjRlhZWQUEBGRmZmqJqT1cIBDExsbCVqDY
+2Fi8VgMUWoEOHTrk5+dnbW0dFBR08eJFGC4WixMSElgs1oABA44ePQoDDxw4YGdnp+nQDQ0N
+MTExHA7HysrKw8NjwYIF+AQ+WtRqurP63mXY1lxSUqJXKpJCms5wQ4cO5XK5d+/eHT16NNFa
+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
+TkSuQmCC
+</d>
+</data>
+</abiword>
