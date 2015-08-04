@@ -1,0 +1,82 @@
+Michael Pobega
+CS351
+
+
+Question 1:
+
+I didn't have enough time to fully implement every feature, but I got the
+basic stuff down. I wanted the shopping bag to be saved through hidden POST
+data (the downfall is that it won't be remembered between sessions, though).
+
+I didn't get as far as I wanted, but if you look at the URLs the page is
+generating you will see that I was able to make a usable interface out of what
+I was given, and all I had left to do was implement the shopping cart (that
+would save an hash of arrays through hidden POST data, basically.)
+
+I planned on having it look like this: (data-wise)
+
+{
+	nickel-2006-S	=>	[ 5, 194 ],
+	penny-2005-p	=>	[ 1, 30  ],
+	nickel-2003-S	=>	[ 2, 123 ],
+	quarter-2003-S	=>	[ 6, 93  ],
+}
+
+basically the hash keys are the names of the coins (by specific date and
+such), and the value is an anonymous array with the 0 indice being the number
+purchased, and the 1 indice being the price of this specific coin.
+
+The work I did do is located in `one.pl'. The script is very short but very
+efficient, so please don't judge it based on length.
+
+
+
+Question 2: 
+
+for some reason I wasn't able to get the validation to work, and I
+think it was due to the lack of the `htpasswd' command. I threw the htaccess
+stuff in ~pobegam/FIN351F09/htaccess for you to look at.
+
+I definitely know for a fact this setup should work though, because I just
+used it at home 40 minutes ago when studying for the exam.
+
+
+
+Question 3:
+
+I was able to get the .cgi file and figure this much out:
+
+to begin with, the script must be given a CONTENT_LENGTH, QUERY_STRING and
+PATH_INFO otherwise it terminates. To do this you add some path info to the
+address, and a GET string at the end (something like
+www2.cgi/my/path/info?get). I tried giving the string some CONTENT_LENGTH by
+forcing POST data to your script from one in my own directory, but it doesn't
+seem to want to work...
+
+
+in the path variable, the sixth entry must be greater than one and the fifth
+entry must be greater than 2x the sixth. The default variable (the second part
+of pathinfo) must be "ILoveWinter" (or at least contain it)
+
+You also must create two files in /tmp (/tmp/PartThreeOfPathInfo and IPAddress
+and /tmp/PartFourofPathInfo and IPaddress) (so for example, if path_info part
+3 was `9' then you would use something like /tmp/9192.168.1.2) that contain on
+line PATH_INFO[5] and PATH_INFO[6] equal entries - and on the lines before
+that, the entries must also be equal.
+
+Sorry if the above was confusing, but the whole surprise question is pretty
+confusing in itself. Pretty tough to elaborate.
+
+
+
+Question 4:
+
+I realize we discussed this during class, but wouldn't it be best to just have
+the server serve the files to the client, and have the files handled at the
+client side? I imagine that it'd be the most seamless way to get support for
+something like this to work.
+
+Otherwise, you'd have to edit Apache2 and teach it how to interpret such
+files; not that it's too hard of a job, but I think it'd be much better off
+kept at the client level -- by telling Apache to always serve 'tgif' files as
+a download (and never trying to display them).
