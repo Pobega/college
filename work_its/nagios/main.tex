@@ -1,0 +1,336 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[color=blue!20]{todonotes}
+\usepackage{titlesec}
+
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+\usepackage{hyperref}
+
+\usepackage{listings}
+
+\lstdefinelanguage{nagconf}
+  {
+  frame=tb,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+  }
+
+\title{Nagios}
+
+\author{Michael Pobega (pobegam@sunyit.edu)}
+
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+\clearpage\maketitle
+\thispagestyle{empty}
+
+\begin{abstract}
+Documentation of the Nagios host at 150.156.16.78. Covers the installation and configuration of Nagios, deploying and configuring NRPE hosts and using Ansible to automate some tasks.
+\end{abstract}
+
+\clearpage
+\thispagestyle{empty}
+\tableofcontents
+\end{titlepage}
+\clearpage
+
+\section{Quick System Information}
+\label{sec:info}
+
+\subsection{Software Versions}
+\begin{description}
+  \item[$\bullet$ Oracle Enterprise Linux] release 6.5 (Santiago)
+  \item[$\bullet$ Kernel] 3.8.13-26.1.1.el6uek.x86\_64
+  \item[$\bullet$ Nagios] 3.5.1-1.el6.x86\_64
+  \item[$\bullet$ nagios-plugins-all] 1.4.16-10.el6.x86\_64
+\end{description}
+
+
+\subsection{Important File Locations}
+\begin{description}
+  \item[$\bullet$ Nagios configuration files] /etc/nagios/
+    \item[$\bullet$ Nagios HTTPD config file] /etc/httpd/conf.d/nagios.conf
+  \item[$\bullet$ Nagios plugins for yum install] /usr/lib64/nagios/plugins
+  \item[$\bullet$ Nagios plugins for source install] /usr/local/nagios/libexec
+  \item[$\bullet$ NRPE configuration file] /etc/nagios/nrpe.cfg
+  \item[$\bullet$ NRPE configuration directory] /etc/nrpe.d/
+  \item[$\bullet$ Related Ansible Playbooks (avl-sysans-001)]:
+  \begin{description}
+    \item[$\bullet$ $\mathtt{\sim}$ansible/scripts/nagios/nrpe.yml:] installs nrpe from source on the target machine(s). Specify your arguments on the command line as per the documentation in the header comments of the playbook. Also opens port 5666 for Nagios in /etc/sysconfig/iptables to allow connections to the NRPE daemon.
+    \item[$\bullet$ $\mathtt{\sim}$ansible/scripts/nagios/custom-commands.yml:] update the custom-commands configuration file and upload/update custom shell scripts to /etc/nrpe.d/. Used to deploy NRPE check scripts to all hosts simultaneously.
+  \end{description}
+  \item[$\bullet$ Nagios Graph]:
+  \begin{description}
+    \item[$\bullet$ Installation Directory] /usr/local/nagiosgraph/
+    \item[$\bullet$ Enabling in Apache2] added \textit{include /usr/local/nagiosgraph/etc/nagiosgraph-apache.conf} to \textbf{/etc/conf/httpd.conf}
+  \end{description}
+\end{description}
+
+\section{Preface}
+
+The information below may or may not be applicable to systems installed after the original date. Version numbers are included for completeness and may not reflect the exact versions installed from the official OEL repositories.
+
+If you are using this documentation to reinstall Nagios please read the official Nagios documentation located at \url{http://www.nagios.org/documentation} to make sure that there haven't been any huge changes between the version documented here and the version being installed. \todo{Compare with the version numbers above!}
+
+\section{Nagios}
+
+\subsection{Installation}
+Nagios is installed from the standard OEL repositories, while nrpe and nagios-plugins-all are installed from \todo{Extended Packages for Enterprise Linux}EPEL. Make sure EPEL is enabled and run
+\begin{center}
+	\textit{\# yum install nagios nrpe nagios-plugins-all}
+\end{center}
+This will install Nagios, NRPE and all of the plugins the standard CentOS way (see section \ref{sec:info} for more information.) At this point in time your Nagios installation is actually done, just open port 80 and configure all of your hosts.
+
+If you are migrating to a newer version of Nagios copying and pasting the configuration files over should be enough. Use \textit{nagios -v /etc/nagios/nagios.conf} to verify your configuration before starting/stopping the daemon.
+
+\subsection{Configuration}
+
+There are multiple configure files and directories of interest under /etc/nagios
+
+\begin{description}
+  \item[$\bullet$ /etc/nagios/nagios.cfg] Main Nagios configuration file.
+  \item[$\bullet$ /etc/nagios/hosts/] directory of host configuration files. One file per host, with hostname.cfg as the file name (ex. hosts/avl-sysamp-001.cfg)
+  \item[$\bullet$ /etc/nagios/hostgroups/] directory of hostgroup configuration files. One file per hostgroup, with hostgroup.cfg as the file name (ex. hostgroups/nrpe.cfg)
+  \item[$\bullet$ /etc/nagios/objects/] all of the template files are included here. These are a bit on the unorganized side, but each file should be self explanatory based on the filename.
+  \item[$\bullet$ /etc/nagios/httpd-group.cfg] HTTPD hostgroup file. A list of usernames that are allowed to access and modify Nagios from the web interface.
+\end{description}
+
+\subsection{Allowing New Users to view Nagios}
+Add the specified user to the \textbf{/etc/nagios/httpd-group.cfg} file above and restart httpd. After the web server comes back up the new user will be allowed access (assuming correct credentials have been supplied).
+
+\subsection{Adding Hosts}
+
+To add a host create a new file under \textit{/etc/nagios/hosts/} and call it hostname.cfg (ex. avl-sysamp-001.cfg\todo{This is just to make our lives easier and make the directory easy to parse with a simple \textit{ls}}).
+\\
+
+\begin{lstlisting}[language=nagconf]
+define host {
+	use			linux-server
+	host_name		avl-sysamp-001
+	alias			avl-sysamp-001
+	hostgroups		linux-servers,nrpe
+	address			150.156.16.5
+	contact_groups		systems
+	}
+
+define service {
+	use			generic-service
+	host_name		avl-sysamp-001
+	service_description	No. of Sessions
+	check_command		check_nrpe!check_logins!-a 7 10
+    }
+\end{lstlisting}
+\hfill \textit{Ampere's config file}\\
+
+Make sure that you put the host into the proper \todo{see section \ref{sec:hostgroups} for information on configuring hostgroups} hostgroup(s) it belongs to and don't redefine services unless you are trying to override the hostgroup's configuration.
+
+\subsection{Adding Hostgroups}
+\label{sec:hostgroups}
+
+To add a new hostgroup create a new file under \textit{/etc/nagios/hostgroups/} and call it hostgroupname.cfg (ex. nrpe.cfg).
+\\
+
+\begin{lstlisting}[language=nagconf]
+define hostgroup{
+        hostgroup_name  nrpe
+        alias           NRPE servers
+        }
+
+define service{
+	use			generic-service
+	hostgroup_name		nrpe
+	service_description	RAM
+	check_command		check_nrpe!check_ram
+}
+
+define service{
+	use			generic-service
+	hostgroup_name		nrpe
+	service_description	Root FS
+	check_command		check_nrpe!check_root
+}
+
+\end{lstlisting}
+\hfill \textit{NRPE hostgroup's config file}\\
+
+Make sure to put the host into the proper hostgroup(s) it belongs to and don't redefine services unless you are trying to override the hostgroup's configuration.
+
+\subsubsection{Adding Hosts to Hostgroups}
+
+Adding hosts to hostgroups is a simple, if sometimes time consuming task. To add a host to the hostgroup you just list the hostgroup in that host's configuration file (see Ampere's configuration file above). A host may be in more than one hostgroup, and services defined by hostgroups may be overridden in the host's file (in the case where you want HTTP to be checked on a port other than 80, etc) as long as the \textbf{service\_description} directives match.
+
+\subsection{Advantages and Disadvantages}
+
+The configuration layout described above has it's advantages and disadvantages. One disadvantage is that having everything in separate files could become troublesome down the line (\textit{"Just where is that thing configured?"}), but if all future changes are documented and follow the hierarchical structure described in the document, it should stay fairly readable.
+
+One huge advantage of this layout is that it's easy to use command line tools to find pertinent information in the configuration files. Wondering how SSH is defined on all hosts? \textit{grep ssh /etc/nagios/hosts/*.cfg}. Want to grep through the hostgroups and hosts? \textit{grep ssh /etc/nagios/host*/*cfg}.
+
+The configuration becomes a little more complicated, but the management of the system becomes worlds easier.
+
+
+\section{Nagios Graphing}
+
+Nagiosgraph was installed from \url{http://nagiosgraph.sourceforge.net/}. It's the default installation with no modifications made to anything. It is installed to \textit{/usr/local/nagiosgraph/}
+
+To get graphing to work on a specific services you have to add an \textbf{action\_url} to the service. The \textbf{action\_url} \todo{The action\_url is what makes the graph show up on the Nagios frontend. Mouse over for quick access to the last 24 hours of monitoring!} is recognized in both host files and hostgroup files.
+
+\begin{lstlisting}[language=nagconf]
+define service {
+	use			generic-service
+	host_name		avl-sysamp-001
+	service_description	No. of Sessions
+	check_command		check_nrpe!check_logins!-a 7 10
+    action_url		/nagiosgraph/cgi-bin/show.cgi?host=$HOSTNAME$&service=$SERVICEDESC$' onMouseOver='showGraphPopup(this)' onMouseOut='hideGraphPopup()' rel='/nagiosgraph/cgi-bin/showgraph.cgi?host=$HOSTNAME$&service=$SERVICEDESC$
+    }
+\end{lstlisting}
+\hfill \textit{Snipper from Ampere's config file demoing action\_url}\\
+
+\subsection{Nagiosgraph Workaround}
+For some reason Nagiosgraph would stop updating graphs automatically after a while for seemingly no reason. To work around this I've added a cronjob that runs \textit{/usr/local/nagiosgraph/bin/insert.pl} as root every 24 hours to force the graphs to update.
+
+\section{NRPE}
+
+NRPE stands for \textbf{Nagios Remote Plugin Executor}. It runs on the host being monitored by Nagios and listens on port 5666 for a TCP connection\todo{Don't forget to open 5666 on your firewall!}. After connecting to NRPE Nagios runs a script on the remote host to do a local check (such as RAM or disk usage.)
+
+\subsection{Installing NRPE on a host}
+First we are going to need some build tools, so run
+\begin{center}
+	\textit{\# yum install gcc make automake openssl openssl-devel xinetd}
+\end{center}
+Next we're going to compile Nagios Plugins from source. Fetch nagios-plugins-1.5.tar.gz \todo{This file is also available on avl-sysans-001 in /srv/nfs/nrpe/} from \url{http://www.nagios.org/download/plugins}. Untar it and run configure with these options:
+\begin{center}
+	\textit{\# ./configure --sysconfdir=/etc/nagios --enable-ssl --enable-command-args}
+\end{center}
+Finalize the installation by running \textit{make} and \textit{make install}.\\
+
+Now we need to compile the nrpe daemon itself. Grab nrpe-2.15.tar.gz from \url{http://sourceforge.net/projects/nagios/files/nrpe-2.x/nrpe-2.15/nrpe-2.15.tar.gz/download}\todo{Again, this file is available on avl-sysans-001 in the same directory as the Nagios plugins}. Just like before we are going to use the same arguments to configure the installation
+\begin{center}
+	\textit{\# ./configure --sysconfdir=/etc/nagios --enable-ssl --enable-command-args}
+\end{center}
+Then similar to above, run \textit{make all} and \textit{make install} to install it.\\
+
+Now we need a user for NRPE to run as. Go ahead and \textbf{add a nagios user and group} to the system. 
+
+\subsubsection{Configuration Files}
+For simplicity sake rather than explain every single configuration option I will list below where the files exist on avl-sysans-001 and where they belong on the NRPE host.\\
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|l}
+avl-sysamp-001 & NRPE host \\\hline
+/srv/nfs/nrpe/nrpe.cfg & /etc/nagios/nrpe.cfg \\
+/srv/nfs/nrpe/xinetd.d/nrpe & /etc/xinetd.d/nrpe\\
+/srv/nfs/nrpe/libexec/check\_mem.pl & /usr/local/nagios/libexec/check\_mem.pl\\
+/srv/nfs/nrpe/custom-commands.cfg & /etc/nrpe.d/custom-commands.cfg\\
+\end{tabular}
+\caption{Config file locations}
+\end{table}
+
+Make sure to copy these files over and chown them to nagios:nagios (or nrpe:nrpe if nrpe was installed via EPEL.)\\
+
+Don't forget to open port 5666 on the firewall and make sure SELinux is either disabled or allowing NRPE to do it's thing.\\
+
+Add nrpe to the list of system services by appending the following line to \textbf{/etc/services}
+
+\begin{center}
+	\textit{nrpe		5666/tcp		\# Nagios NRPE}
+\end{center}
+
+Finally, make sure that xinetd is started and enabled at boot by issuing the following commands
+
+\begin{center}
+	\textit{\# chkconfig xinetd on\\\# service xinetd restart}
+\end{center}
+
+
+\subsection{Host Discrepancies}
+When originally deploying NRPE we used the packages from EPEL instead of compiling from source. The problem is that the yum packages expect certain files to be in different directories than the source installation does.
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l|l|l}
+ & EPEL installation & Source installation \\\hline
+\textbf{daemon:} & nrpe & xinetd \\
+\textbf{user:} & nrpe & nagios \\
+\textbf{plugin dir:} & /usr/lib64/nagios/plugins/ & /usr/local/nagios/libexec/ \\
+\end{tabular}
+\caption{Discrepancies between EPEL and source NRPE}
+\end{table}
+
+(There are also some legacy hosts that have nrpe installed in an odd way -- you can figure out which these are by using check\_nrpe from Nagios with no commands to see the nrpe version)
+
+\subsubsection{Handling discrepancies during automation}
+The beginning of custom-commands.yml displays a great way to differentiate the hosts from each another based on if and how nrpe has been installed.
+
+\begin{lstlisting}[language=nagconf]
+    - name: check if /etc/nrpe.d/ exists
+      stat: path=/etc/nrpe.d/
+      register: nrpe_exists
+    - name: check if /etc/init.d/nrpe exists
+      stat: path=/etc/init.d/nrpe
+      register: nrpe_initd
+    - name: check if /etc/xinetd.d/nrpe exists
+      stat: path=/etc/xinetd.d/nrpe
+      register: nrpe_xinetd
+\end{lstlisting}
+\hfill \textit{Snippet from "custom-commands.yml"}\\
+
+
+The logic here should be obvious. If the directory /etc/nrpe.d/ exists, NRPE is installed. If /etc/init.d/nrpe exists, it's been installed via EPEL. And failing that if /etc/xinetd.d/nrpe exists it's installed from source.
+
+\subsection{Adding custom commands to NRPE hosts}
+Custom commands are defined in the NRPE configuration files. You can define them in /etc/nagios/nrpe.cfg, or any other file/directory that configuration includes. Our deployment includes every cfg file in the directory /etc/nrpe.d/, and generally in that directory there are two files: \textbf{custom-commands.cfg} and \textbf{local-commands.cfg}. This directory also houses any custom made shell scripts that are used in-house to run as nrpe custom commands.\\
+
+\textbf{custom-commands.cfg} should be on every server. It is what we use to deploy new commands to all of our NRPE hosts, and it is updated on all NRPE servers simultaneously using Ansible.
+
+\textbf{local-commands.cfg} is not on every server. It is only for commands local to that server. 
+
+\subsection{NRPE as a Nagios hostgroup}
+There are two Nagios hostgroups for NRPE hosts; \textit{nrpe} and \textit{oldnrpe}. \textit{nrpe} represents all of the hosts that are running a more recent version of NRPE, including our \textbf{custom-commands.cfg}. When using Ansible to keep everything up to date, all the servers in the \textit{nrpe} group can be expected to have the same behavior. \textit{oldnrpe} is the Nagios hostgroup for the legacy hosts running NRPE. These hosts were configured and managed by a previous system administrator, and are currently next on the slate for retirement. We don't update these, and just pray to \$DIETY that they don't break.
+
+\section{NSClient++}
+Grab the NSClient++ installer from the netapp. The installer is located at:
+\begin{center}	\textit{\textbackslash{}\textbackslash{}files.sunyit.edu\textbackslash{}information\_technology\_services\textbackslash{}Systems\textbackslash{}Software\textbackslash{}NSClient++}\\
+\end{center}
+
+Install either \textbf{NSCP-0.4.1.102-Win32.msi} or \textbf{NSCP-0.4.1.102-x64.msi} based on the server's architecture. Be sure to read \textbf{NSClient\_Installation.docx} for more documentation on installing and configuring NSClient++
+
+\section{Related Ansible Playbooks}
+\subsection{nrpe.yml}
+\textbf{nrpe.yml} is our playbook for deploying NRPE to new hosts. It must be run with the argument \textit{--extra-vars="hosts=hostgroup"} (as documented in the comments of the playbook) or like so: 
+\begin{center}
+  \textit{ansible-playbook all -i avl-syswut-001, nrpe.yml}
+\end{center}
+(keep in mind the trailing comma)
+\subsection{custom-commands.yml}
+\textbf{custom-commands.yml} updates all of the hosts in the \textit{[nrpe]} group in \textbf{/etc/ansible/hosts}. It uploads the custom-commands.yml from /srv/nfs/nrpe/ to the remote hosts, swaps out the [NAGPLUGDIR] with the proper plugin directory for the type of NRPE installation, and uploads/updates all of the scripts from /srv/nfs/nrpe/libexec/.
+
+To add a new commands to all of the NRPE hosts you would start by adding it to \textbf{/srv/nfs/nrpe/custom-commands.yml}. If it requires a new executable (a custom shell script or binary) place the file into \textbf{/srv/nfs/nrpe/libexec/}. Finally when everything is in place run \textbf{/home/ansible/scripts/nagios/custom-commands.yml} by invoking it on the command line:
+
+\begin{center}
+  \textit{ansible-playbook custom-commands.yml}
+\end{center}
+
+To have the changes reflected in Nagios add a new command to the nrpe group in \textbf{/etc/nagios/hostgroups/nrpe.cfg}, then restart Nagios and all of the hosts should now have the new command!
+
+\section{Future Plans for the Server}
+\begin{description}
+  \item[$\bullet$ Monitoring switches] This is entirely feasible using SNMP, but within the time constraints I don't think this will be possible. If everything else gets finished quicker than expected I will come back to this.
+  \item[$\bullet$ Reorganizing Contact Groups] Simple configuration changes. 
+  \item[$\bullet$ 24-Hour Digest] a script that would dump a short version of the daily problems/recoveries and e-mail them out. Would be useful for people who want to know what problems have arisen but don't want to be subscribed to every admin email alert.
+\end{description}
+
+\end{document}
